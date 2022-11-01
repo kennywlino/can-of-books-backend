@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const postBooks = require('./modules/postBook.js');
+const deleteBook = require('./modules/deleteBook.js');
 
 
 const mongoose = require('mongoose');
@@ -32,6 +33,8 @@ app.use(express.json());
 const PORT = process.env.PORT || 3001;
 
 // Endpoints
+
+app.delete('/books/:bookID', deleteBook);
 
 app.get('/test', (request, response) => {
 
