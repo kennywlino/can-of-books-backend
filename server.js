@@ -3,6 +3,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const postBooks = require('./modules/postBook.js');
 
 
 const mongoose = require('mongoose');
@@ -22,16 +23,23 @@ db.once('open', function() {
   console.log('Mongoose is connected');
 });
 
+// Middleware
 const app = express();
 app.use(cors());
 
+app.use(express.json());
+
 const PORT = process.env.PORT || 3001;
+
+// Endpoints
 
 app.get('/test', (request, response) => {
 
   response.send('test request received')
 
 })
+
+app.post('/books', postBooks);
 
 app.get('/books', getBooks);
 
